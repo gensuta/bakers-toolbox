@@ -1,0 +1,6 @@
+# Ignore compiled Python files
+__pycache__/
+*.pyc
+
+# Ignore Node.js modules
+node_modules/
