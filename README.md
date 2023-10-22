@@ -5,7 +5,6 @@ Then step into the Baker’s Toolbox, where a baker’s possibilities are endles
 ## Inspiration 🎂
 This project was inspired by the challenges we faced in our own baking endeavors. When looking up a recipe, we found that there was usually never an option to halve or quarter recipes, and not many recipe blog websites would provide substitutions for ingredients. This would lead to a never-ending spiral of trying to find the “perfect” recipe with just the right portion size and only the ingredients that we had at our disposal. We hope that this project can mitigate these issues and encourage bakers of all kinds to continue to try their hand at the art of baking! 
 
-
 ## What it does 🥚
 There are three main features that Baker's ToolBox has:
 - Generating Conversion (depending on the user’s inputted conversion factor, either increase/decrease the current ingredient quantities)
@@ -14,6 +13,8 @@ There are three main features that Baker's ToolBox has:
 
 ## How we built it 🔨
 We incorporated MaterializeCSS to build our HTML pages. This included built-in HTML/CSS and JS components. Additionally, we incorporated Spoonacular API to get substitute for ingredients that the user want to substitute.
+- MaterializeCSS: https://materializecss.com/about.html
+- SpoonacularAPI: https://spoonacular.com/food-api/docs
 
 ## Challenges we ran into 🛑
 Since we were all very new to creating a project from scratch. We had a bit of issues with formatting the file system. We were also very unfamiliar with component library & API which really pushed us out of our comfort zone by having to reach out to mentors for extra help, reading the documentation, and also getting some help from YouTube.
