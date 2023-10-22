@@ -1,62 +1,54 @@
-class RecipeBook
-{
-    constructor(recipes)
-    {
+class RecipeBook {
+    constructor(recipes) {
         this.recipes = recipes;
     }
 
-    AddRecipe(recipe) 
-    {
+    AddRecipe(recipe) {
         this.recipes.push(recipe);
     }
 
-    RemoveRecipe(recipe)
-    {
+    RemoveRecipe(recipe) {
         const index = this.recipes.indexOf(recipe);
-        this.recipes.splice(index,1);
+        this.recipes.splice(index, 1);
     }
 }
 
-class Recipe{
+class Recipe {
 
     /// name is a string, servingSize is a float, ingredients is an array
-    constructor(name,servingSize,ingredients)
-    {
+    constructor(name, servingSize, ingredients) {
         this.name = name;
         this.servingSize = servingSize;
         this.ingredients = ingredients
     }
 
-    AddIngredient(ingredient)
-    {
+    AddIngredient(ingredient) {
         this.ingredients.push(ingredient);
     }
 
-    RemoveIngredient(ingredient)
-    {
+    RemoveIngredient(ingredient) {
         const index = this.ingredients.indexOf(ingredient);
-        this.ingredients.splice(index,1);
+        this.ingredients.splice(index, 1);
     }
 }
 
-class Ingredient
-{
+class Ingredient {
     // name is a string, amount is a float, measurement is a string
     //amount is like 1 and 1 1/2 while measurement is like cup, gram, milileter
-    constructor(name,amount,measurement)
-    {
+    constructor(name, amount, measurement) {
         this.name = name;
         this.amount = amount;
         this.measurement = measurement
     }
 }
 
-
 let myRecipeBook = GetRecipeBook();
+const saveBtn = document.getElementById('save-recipe');
 
-if(!myRecipeBook) // if it's empty...
+
+if (!saveBtn) // if we're not on the add recipe page...
 {
-    if(!myRecipeBook) // if it's empty...
+    if (!myRecipeBook) // if it's empty...
     {
         myRecipeBook = new RecipeBook([]); // create a new recipe book!
         //myRecipeBook = getPlaceHolderBook();
@@ -69,54 +61,51 @@ if(!myRecipeBook) // if it's empty...
 }
 else // else...
 {
-    const saveBtn = document.getElementById('save-recipe');
-    saveBtn.onclick = function(){
-       SaveRecipe(CollectRecipeInfo());
+    saveBtn.onclick = function () {
+        SaveRecipe(CollectRecipeInfo());
     }
 }
 
 
-function CollectRecipeInfo()
-{
+
+
+function CollectRecipeInfo() {
     const rows = document.querySelectorAll('tr');
     let ingredients = [];
-    rows.forEach((r) =>
-    {
-        if (r.getElementsByTagName("th").length == 0)
-        {
+    rows.forEach((r) => {
+        if (r.getElementsByTagName("th").length == 0) {
             const name = r.getElementsByTagName("td")[0].querySelector('input').value;
 
             const amt = r.getElementsByTagName("td")[1].querySelector('input').value;
 
-            const units = (!r.getElementsByTagName("td")[2].querySelector('input').value) 
-                ? " " 
+            const units = (!r.getElementsByTagName("td")[2].querySelector('input').value)
+                ? " "
                 : r.getElementsByTagName("td")[0].querySelector('input').value;
 
-            ingredients.push(new Ingredient(name,amt,units));
+            ingredients.push(new Ingredient(name, amt, units));
         }
     });
 
     const recipeName = document.getElementById('recipeName').value;
-    const servingSize = (document.getElementById('Conversion_factor').value > 0) 
+    const servingSize = (document.getElementById('Conversion_factor').value > 0)
         ? document.getElementById('Conversion_factor').value
         : 1;
 
-    return new Recipe(recipeName,servingSize,ingredients);
+    return new Recipe(recipeName, servingSize, ingredients);
 }
 
 
-function getPlaceHolderBook()
-{
+function getPlaceHolderBook() {
     const butter = new Ingredient("butter", 1, "stick");
-    const egg = new Ingredient("egg",1,"");
-    const milk = new Ingredient("milk",2,"cup");
+    const egg = new Ingredient("egg", 1, "");
+    const milk = new Ingredient("milk", 2, "cup");
     const chocolateSyrup = new Ingredient("chocolate syrup", 1, "tablespoon");
 
-    const friedEgg = new Recipe("Fried Eggs",1,[egg,butter]);
+    const friedEgg = new Recipe("Fried Eggs", 1, [egg, butter]);
     const chocolateMilk = new Recipe("Chocolate Milk", 1, [milk, chocolateSyrup]);
-    const failedPancake = new Recipe("Not a Pancake", 4, [butter,egg,milk,chocolateSyrup]);
+    const failedPancake = new Recipe("Not a Pancake", 4, [butter, egg, milk, chocolateSyrup]);
 
-    const recipeBook = new RecipeBook([friedEgg,chocolateMilk,failedPancake]);
+    const recipeBook = new RecipeBook([friedEgg, chocolateMilk, failedPancake]);
 
     return recipeBook;
 }
@@ -124,10 +113,9 @@ function getPlaceHolderBook()
 
 
 // Is called at the start of the recipes page.
-function DisplayAllRecipes()
-{
+function DisplayAllRecipes() {
     myRecipeBook.recipes.forEach(recipe => {
-        if(recipe) // if the recipe isn't null/undefined
+        if (recipe) // if the recipe isn't null/undefined
         {
             DisplayRecipe(recipe);
         }
@@ -135,8 +123,7 @@ function DisplayAllRecipes()
 }
 
 // Creates a list item and a card to display all the recipe details in the recipe page's collection
-function DisplayRecipe(recipe)
-{
+function DisplayRecipe(recipe) {
     // Setting up the layout for the recipe before inputing the information in
     const collection = document.getElementById("recipe-list");
 
@@ -147,7 +134,7 @@ function DisplayRecipe(recipe)
     const a = document.createElement("a");
 
     const cardDiv = document.createElement("div");
-    cardDiv.classList.add("card","small","hoverable");
+    cardDiv.classList.add("card", "small", "hoverable");
 
     const imgDiv = document.createElement("div");
     imgDiv.classList.add("card-image");
@@ -176,16 +163,14 @@ function DisplayRecipe(recipe)
 
     let i = 0;
 
-    while(i < 3 && i < recipe.ingredients.length)
-    {
+    while (i < 3 && i < recipe.ingredients.length) {
         const ingredient = document.createElement("span");
         contentDiv.appendChild(ingredient);
         ingredient.textContent = ` | ${recipe.ingredients[i].amount} ${recipe.ingredients[i].name}`
         i++;
     }
 
-    if(i == 3 && recipe.ingredients.length > 3)
-    {
+    if (i == 3 && recipe.ingredients.length > 3) {
         const ingredient = document.createElement("span");
         contentDiv.appendChild(ingredient);
         ingredient.textContent = ' etc.'
@@ -195,31 +180,28 @@ function DisplayRecipe(recipe)
 }
 
 //Adds a new recipe to the list of recipes
-function SaveRecipe(recipe)
-{
-    if(!myRecipeBook)
-    {
+function SaveRecipe(recipe) {
+    console.log(recipe);
+    if (!myRecipeBook) {
         myRecipeBook = new RecipeBook([]);
     }
     myRecipeBook.recipes.push(recipe);
     SaveRecipeBook();
-   // myRecipeBook.AddRecipe(recipe); // this sin't working for some reason and we're runnign out of time
+    // myRecipeBook.AddRecipe(recipe); // this sin't working for some reason and we're runnign out of time
 }
 
 //Stores recipe book to local storage
-function SaveRecipeBook()
-{
-    window.localStorage.setItem("myRecipeBook",JSON.stringify(myRecipeBook));
+function SaveRecipeBook() {
+    window.localStorage.setItem("myRecipeBook", JSON.stringify(myRecipeBook));
 }
 
 //Gets the list of recipes from our saved recipe book
-function GetRecipeBook()
-{
+function GetRecipeBook() {
     return JSON.parse(window.localStorage.getItem("myRecipeBook"));
 }
 
 // Handles Responsiveness for the navbar
-document.addEventListener('DOMContentLoaded', function() {
+document.addEventListener('DOMContentLoaded', function () {
     var elems = document.querySelectorAll('.sidenav');
     var instances = M.Sidenav.init(elems);
-  });
+});
