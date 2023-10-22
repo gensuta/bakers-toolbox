@@ -166,7 +166,7 @@ function DisplayRecipe(recipe) {
     while (i < 3 && i < recipe.ingredients.length) {
         const ingredient = document.createElement("span");
         contentDiv.appendChild(ingredient);
-        ingredient.textContent = ` | ${recipe.ingredients[i].amount} ${recipe.ingredients[i].name}`
+        ingredient.textContent = ` | ${recipe.ingredients[i].amount} ${recipe.ingredients[i].measurement} ${recipe.ingredients[i].name}`
         i++;
     }
 
