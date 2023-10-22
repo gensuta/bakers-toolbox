@@ -9,14 +9,13 @@ document.addEventListener('DOMContentLoaded', function() {
 });
 
 function getSubstitutes() {
-    var mykey = config.MY_KEY;
     const ingredient = document.getElementById("searchInput").value;
     console.log('Ingredient:', ingredient);
     if (!ingredient) {
         alert("Please enter an ingredient.");
         return;
     }
-    const url = `https://api.spoonacular.com/food/ingredients/substitutes?ingredientName=${ingredient}&apiKey=${mykey}`;
+    const url = `https://api.spoonacular.com/food/ingredients/substitutes?ingredientName=${ingredient}&apiKey=7f11394b36b34b8db8ac66cee8c16f0b`;
     fetch(url)
         .then(response => response.json())
         .then(data => {
