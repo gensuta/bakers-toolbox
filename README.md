@@ -3,7 +3,7 @@ This project was inspired by the challenges we faced in our own baking endeavors
 
 
 ## What it does 🥚
-There are three main features that Baker's ToolBox have:
+There are three main features that Baker's ToolBox has:
 - Generating Conversion (depending on the user’s inputted conversion factor, either increase/decrease the current ingredient quantities)
 - Suggesting Sub (If the user choose to do substitution, the app allows user to search for a substitution for the ingredient)
 - Handling user input of ingredient (if the user input an ingredient, they will be able to view it on the recipe page)
