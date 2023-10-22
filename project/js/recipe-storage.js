@@ -7,6 +7,7 @@ class RecipeBook
 
     AddRecipe(recipe) 
     {
+        console.log("BRO???");
         this.recipes.push(recipe);
     }
 
@@ -41,28 +42,74 @@ class Recipe{
 
 class Ingredient
 {
-    // name is a string, amount is a float, measurement is a string
-    //amount is like 1 and 1 1/2 while measurement is like cup, gram, milileter
-    constructor(name,amount,measurement)
+    // name is a string, amount is a float, unit is a string
+    //amount is like 1 and 1 1/2 while unit is like cup, gram, milileter
+    constructor(name,amount,unit)
     {
         this.name = name;
         this.amount = amount;
-        this.measurement = measurement
+        this.unit = unit
     }
 }
 
 
+const recipesPage = document.getElementById('recipes-page');
+const recipePopupPage = document.getElementById('recipe-popup-page');
+
 let myRecipeBook = GetRecipeBook();
 
-if(!myRecipeBook) // if it's empty...
+if(recipesPage) // if we're on the recipe page...
 {
-    //myRecipeBook = new RecipeBook([]); // create a new recipe book!
-    myRecipeBook = getPlaceHolderBook();
-    SaveRecipeBook();
+    if(!myRecipeBook) // if it's empty...
+    {
+        //myRecipeBook = new RecipeBook([]); // create a new recipe book!
+        myRecipeBook = getPlaceHolderBook();
+        SaveRecipeBook();
+    }
+    else // else...
+    {
+        DisplayAllRecipes() // display all recipes
+    }
 }
-else // else...
+
+if(recipePopupPage) // if we're on the recipe pop up page...
 {
-    DisplayAllRecipes() // display all recipes
+    const saveBtn = document.getElementById('save-recipe');
+    saveBtn.onclick = function(){
+       SaveRecipe(CollectRecipeInfo());
+    }
+}
+
+
+function CollectRecipeInfo()
+{
+    const rows = document.querySelectorAll('tr');
+    console.log(rows);
+    let ingredients = [];
+    rows.forEach((r) =>
+    {
+        console.log(r);
+        if (r.getElementsByTagName("th").length == 0)
+        {
+
+            const name = r.getElementsByTagName("td")[0].querySelector('input').value;
+
+            const amt = r.getElementsByTagName("td")[1].querySelector('input').value;
+
+            const units = (!r.getElementsByTagName("td")[2].querySelector('input').value) 
+                ? " " 
+                : r.getElementsByTagName("td")[0].querySelector('input').value;
+
+            ingredients.push(new Ingredient(name,amt,units));
+        }
+    });
+
+    const recipeName = document.getElementById('recipeName').value;
+    const servingSize = (document.getElementById('Conversion_factor').value > 0) 
+        ? document.getElementById('Conversion_factor').value
+        : 1;
+
+    return new Recipe(recipeName,servingSize,ingredients);
 }
 
 
@@ -158,6 +205,7 @@ function DisplayRecipe(recipe)
 //Adds a new recipe to the list of recipes
 function SaveRecipe(recipe)
 {
+    console.log(recipe);
     myRecipeBook.AddRecipe(recipe);
 }
 
