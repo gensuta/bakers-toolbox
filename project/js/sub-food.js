@@ -9,7 +9,6 @@ document.addEventListener('DOMContentLoaded', function() {
 });
 
 function getSubstitutes() {
-    var mykey = config.MY_KEY;
     const ingredient = document.getElementById("searchInput").value;
     console.log('Ingredient:', ingredient);
     if (!ingredient) {
