@@ -1,6 +1,6 @@
-# Baker's ToolBox
-Looking to bake a perfectly portioned recipe to stick to health goals or eliminate food waste? Don’t have access to certain ingredients but still yearning for a sweet treat with a homemade touch?
-Then step into the Baker’s Toolbox, where a baker’s possibilities are endless. No matter your limitations, we promise to aid you along your journey of honing your baking skills and satisfying your most fervent cravings.
+# Baker's ToolBox ✨✨
+Looking to bake a perfectly portioned recipe to stick to health goals or eliminate food waste? Don’t have access to certain ingredients but still yearning for a sweet treat with a homemade touch? 🥣 
+Then step into the Baker’s Toolbox, where a baker’s possibilities are endless. No matter your limitations, we promise to aid you along your journey of honing your baking skills and satisfying your most fervent cravings. ✨✨
 
 ## Inspiration 🎂
 This project was inspired by the challenges we faced in our own baking endeavors. When looking up a recipe, we found that there was usually never an option to halve or quarter recipes, and not many recipe blog websites would provide substitutions for ingredients. This would lead to a never-ending spiral of trying to find the “perfect” recipe with just the right portion size and only the ingredients that we had at our disposal. We hope that this project can mitigate these issues and encourage bakers of all kinds to continue to try their hand at the art of baking! 
