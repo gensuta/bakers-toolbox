@@ -31,7 +31,7 @@
     }
   </style>
 
-  <body>
+  <body id="recipe-popup-page">
     <div class="container">
       <div class="row s12 m6 offset-m3">
         <div class="col s12 m6 offset-m3">
@@ -127,8 +127,8 @@
               </div>
             </div>
             <div class="card-action right-align">
-              <a style="color: #e57373" href="#">Cancel</a>
-              <a style="color: #e57373" href="#">Save</a>
+              <a style="color: #e57373" href="recipes.html">Cancel</a>
+              <a style="color: #e57373" href="#" id="save-recipe">Save</a>
             </div>
           </div>
         </div>
@@ -137,6 +137,8 @@
 
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+    <!--Custom JS file handling user data -->
+    <script type="text/javascript" src="js/recipe-storage.js"></script>
     <script>
       $(document).ready(function () {
         let rowCounter = 1; // Start with 1 row
