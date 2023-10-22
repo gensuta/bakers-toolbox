@@ -56,13 +56,52 @@ let myRecipeBook = GetRecipeBook();
 
 if(!myRecipeBook) // if it's empty...
 {
-    //myRecipeBook = new RecipeBook([]); // create a new recipe book!
-    myRecipeBook = getPlaceHolderBook();
-    SaveRecipeBook();
+    if(!myRecipeBook) // if it's empty...
+    {
+        myRecipeBook = new RecipeBook([]); // create a new recipe book!
+        //myRecipeBook = getPlaceHolderBook();
+        SaveRecipeBook();
+    }
+    else // else...
+    {
+        DisplayAllRecipes() // display all recipes
+    }
 }
 else // else...
 {
-    DisplayAllRecipes() // display all recipes
+    const saveBtn = document.getElementById('save-recipe');
+    saveBtn.onclick = function(){
+       SaveRecipe(CollectRecipeInfo());
+    }
+}
+
+
+function CollectRecipeInfo()
+{
+    const rows = document.querySelectorAll('tr');
+    let ingredients = [];
+    rows.forEach((r) =>
+    {
+        if (r.getElementsByTagName("th").length == 0)
+        {
+            const name = r.getElementsByTagName("td")[0].querySelector('input').value;
+
+            const amt = r.getElementsByTagName("td")[1].querySelector('input').value;
+
+            const units = (!r.getElementsByTagName("td")[2].querySelector('input').value) 
+                ? " " 
+                : r.getElementsByTagName("td")[0].querySelector('input').value;
+
+            ingredients.push(new Ingredient(name,amt,units));
+        }
+    });
+
+    const recipeName = document.getElementById('recipeName').value;
+    const servingSize = (document.getElementById('Conversion_factor').value > 0) 
+        ? document.getElementById('Conversion_factor').value
+        : 1;
+
+    return new Recipe(recipeName,servingSize,ingredients);
 }
 
 
@@ -158,7 +197,13 @@ function DisplayRecipe(recipe)
 //Adds a new recipe to the list of recipes
 function SaveRecipe(recipe)
 {
-    myRecipeBook.AddRecipe(recipe);
+    if(!myRecipeBook)
+    {
+        myRecipeBook = new RecipeBook([]);
+    }
+    myRecipeBook.recipes.push(recipe);
+    SaveRecipeBook();
+   // myRecipeBook.AddRecipe(recipe); // this sin't working for some reason and we're runnign out of time
 }
 
 //Stores recipe book to local storage
