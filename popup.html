@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css"
+    />
+    <link
+      href="https://fonts.googleapis.com/icon?family=Material+Icons"
+      rel="stylesheet"
+    />
+  </head>
+
+  <style>
+    body {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      margin: 0;
+    }
+
+    .container {
+      height: 90vh;
+      overflow-y: auto; /*
+  Add a scrollbar when content overflows */
+    }
+
+    .responsive-table {
+      border: none !important;
+    }
+  </style>
+
+  <body>
+    <div class="container">
+      <div class="row s12 m6 offset-m3">
+        <div class="col s12 m6 offset-m3">
+          <div class="card">
+            <div class="card-content">
+              <div class="input-field">
+                <input
+                  type="text"
+                  id="recipeName"
+                  placeholder="Enter Recipe Name"
+                />
+                <label style="color: #e57373" for="recipeName"
+                  >Your new recipe!</label
+                >
+              </div>
+              <p>Click on "+" to add an ingredient to your list!</p>
+
+              <table class="centered responsive-table">
+                <thead style="border: none">
+                  <tr>
+                    <th style="color: #e57373">Ingredient</th>
+                    <th style="color: #e57373">Amount</th>
+                    <th style="color: #e57373">Units</th>
+                  </tr>
+                </thead>
+                <tbody id="table-body">
+                  <!-- Initial row -->
+                  <tr>
+                    <td>
+                      <input
+                        style="text-align: center"
+                        type="text"
+                        id="ingredient_1"
+                        placeholder="Enter Ingredient"
+                      />
+                    </td>
+                    <td>
+                      <input
+                        style="text-align: center"
+                        type="text"
+                        id="amount_1"
+                        placeholder="Enter Amount"
+                      />
+                    </td>
+                    <td>
+                      <input
+                        style="text-align: center"
+                        type="text"
+                        id="units_1"
+                        placeholder="Enter Units"
+                      />
+                    </td>
+                  </tr>
+                  <!-- Additional rows -->
+                </tbody>
+              </table>
+              <div
+                style="margin-top: 10px; margin-left: 10px; text-align: center"
+              >
+                <button
+                  style="background-color: #e57373"
+                  class="btn"
+                  id="add-row"
+                >
+                  <i class="material-icons">add</i>
+                </button>
+              </div>
+
+              <div style="margin-top: 20px">
+                <p>Change recipe yield by a factor of:</p>
+
+                <div style="margin-top: 20px" class="input-field">
+                  <input
+                    type="text"
+                    id="Conversion_factor"
+                    placeholder="Conversion Factor"
+                  />
+                </div>
+                <div style="margin-top: 15px">
+                  <button class="btn" id="Convert">Convert</button>
+                </div>
+              </div>
+
+              <div style="margin-top: 20px">
+                <p>
+                  Don't have an ingredient? Click below to look up
+                  substitutions!
+                </p>
+
+                <div style="margin-top: 20px">
+                  <button class="btn" id="substitutions">Substitutions</button>
+                </div>
+              </div>
+            </div>
+            <div class="card-action right-align">
+              <a style="color: #e57373" href="#">Cancel</a>
+              <a style="color: #e57373" href="#">Save</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+    <script>
+      $(document).ready(function () {
+        let rowCounter = 1; // Start with 1 row
+
+        // Function to handle conversion when "Convert" is clicked
+        $("#Convert").on("click", function () {
+          const conversionFactor = parseFloat($("#Conversion_factor").val()); //parseFloat converts string to float
+
+          // Check if conversion factor is valid
+          if (!isNaN(conversionFactor)) {
+            // Loop through all amounts and convert each one
+            $("input[id^='amount_']").each(function () {
+              const amountId = $(this).attr("id");
+              const amountValue = parseFloat($(this).val());
+
+              if (!isNaN(amountValue)) {
+                const newAmount = amountValue * conversionFactor;
+                $(this).val(newAmount);
+              }
+            });
+          }
+        });
+
+        function addRow() {
+          rowCounter++;
+          const newRow = `
+            <tr>
+              <td><input style="text-align: center" type="text" id="ingredient_${rowCounter}" placeholder="Enter Ingredient"></td>
+              <td><input style="text-align: center" type="text" id="amount_${rowCounter}" placeholder="Enter Amount"></td>
+              <td><input style="text-align: center" type="text" id="units_${rowCounter}" placeholder="Enter Units"></td>
+            </tr>
+          `;
+          $("#table-body").append(newRow);
+        }
+
+        // Add a row when the "Add Ingredient" button is clicked
+        $("#add-row").on("click", addRow);
+      });
+    </script>
+  </body>
+</html>
