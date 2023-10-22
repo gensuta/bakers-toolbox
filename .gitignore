@@ -4,3 +4,4 @@ __pycache__/
 
 # Ignore Node.js modules
 node_modules/
+config.js
